@@ -3,6 +3,7 @@ import 'dart:developer' as developer;
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:noction/failure_model.dart';
+import 'package:noction/screens/reading/pages/update.dart';
 import 'package:noction/screens/reading/reading_model.dart';
 import 'package:noction/screens/reading/reading_repository.dart';
 
@@ -35,7 +36,20 @@ class _ReadingScreenState extends State<ReadingScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/reading/add');
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return UpdateForm(
+                data: ReadingRecord(
+              name: '',
+              type: '',
+              status: '',
+              score: 0,
+              createdTime: DateTime.now(),
+            ));
+          })).then((value) => null).then((_) {
+            _futureItems = ReadingRepository().getItems();
+            setState(() {});
+          });
+          ;
         },
         backgroundColor: Colors.black87,
         mini: true,
@@ -57,10 +71,8 @@ class _ReadingScreenState extends State<ReadingScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     final item = items[index];
                     return ReadingCard(
-                        name: item.name,
-                        createdTime:
-                            DateFormat('yyyy-MM-dd').format(item.createdTime),
-                        score: item.score);
+                      data: item,
+                    );
                   },
                 );
               } else if (snapshot.hasError) {

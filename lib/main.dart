@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:noction/screens/reading/pages/add.dart';
+import 'package:noction/screens/reading/pages/update.dart';
+import 'package:noction/screens/reading/reading_model.dart';
 import 'package:noction/screens/reading/reading_screen.dart';
 
 void main() async {
@@ -22,7 +23,6 @@ class MyApp extends StatelessWidget {
       // home: const ReadingScreen(),
       routes: {
         '/': (context) => const ReadingScreen(),
-        '/reading/add': (context) => const MyCustomForm(),
       },
     );
   }

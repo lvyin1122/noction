@@ -9,4 +9,8 @@ A Flutter application that provides various features back-ended with Notion API.
     - [ ] CRUD
     - [ ] Miscellaneous
 - [ ] Weekly Planner
+    - [ ] Layout
 - [ ] Habit Tracker (Score your day)
+    - [ ] Layout
+- [ ] Goals
+    - [ ] Layout

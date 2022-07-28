@@ -1,74 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:noction/screens/reading/pages/update.dart';
+import 'package:noction/screens/reading/reading_model.dart';
 
-class ReadingCard extends StatelessWidget {
-  const ReadingCard(
-      {Key? key,
-      required this.name,
-      this.year = "1900",
-      required this.createdTime,
-      required this.score})
-      : super(key: key);
+class ReadingCard extends StatefulWidget {
+  const ReadingCard({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+  final ReadingRecord data;
+  @override
+  State<ReadingCard> createState() => _ReadingCardState();
+}
 
-  final String name;
-  final String year;
-  final String createdTime;
-  final double score;
+class _ReadingCardState extends State<ReadingCard> {
+  Color _cardColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 72,
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      margin: EdgeInsets.only(top: 8, left: 10, right: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            width: 40,
-            height: double.infinity,
-            child: Icon(Icons.book_outlined, size: 28),
-          ),
-          Expanded(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(year, style: yearStyle),
-                    Text(
-                      name,
-                      style: nameStyle,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      "Created on ${createdTime}",
-                      style: timeStyle,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    )
-                  ],
+    return GestureDetector(
+      onTapDown: (details) {
+        setState(() {
+          _cardColor = Colors.grey.shade100;
+        });
+      },
+      onTapUp: (details) {
+        setState(() {
+          _cardColor = Colors.white;
+        });
+      },
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return UpdateForm(data: widget.data);
+        }));
+      },
+      child: Container(
+        width: double.infinity,
+        height: 72,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin: EdgeInsets.only(top: 8, left: 10, right: 10),
+        decoration: BoxDecoration(
+          color: _cardColor,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              width: 40,
+              height: double.infinity,
+              child: Icon(Icons.book_outlined, size: 28),
+            ),
+            Expanded(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("1900", style: yearStyle),
+                      Text(
+                        widget.data.name,
+                        style: nameStyle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        "Created on ${widget.data.createdTime}",
+                        style: timeStyle,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("${score}", style: scoreStyle),
-                ],
-              )
-            ],
-          )),
-        ],
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("${widget.data.score}", style: scoreStyle),
+                  ],
+                )
+              ],
+            )),
+          ],
+        ),
       ),
     );
   }
