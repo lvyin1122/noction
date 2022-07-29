@@ -39,6 +39,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return UpdateForm(
                 data: ReadingRecord(
+              id: '',
               name: '',
               type: '',
               status: '',

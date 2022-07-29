@@ -49,7 +49,7 @@ class ReadingRepository {
     }
   }
 
-  static Future<void> add(ReadingRecord data) async {
+  Future<void> addItem(ReadingRecord data) async {
     try {
       final url = '${_baseUrl}pages/';
       final response = await http.post(
@@ -63,6 +63,40 @@ class ReadingRepository {
           'parent': {
             'database_id': '${dotenv.env['NOTION_DB_READING']}',
           },
+          "properties": {
+            "Name": {
+              "title": [
+                {
+                  "text": {"content": data.name}
+                }
+              ]
+            },
+            "Type": {
+              "select": {"name": data.type}
+            },
+            "Status": {
+              "select": {"name": data.status}
+            },
+            "Score": {"number": 2.5}
+          }
+        }),
+      );
+    } catch (_) {
+      throw const Failure(message: 'Something went wrong!');
+    } finally {}
+  }
+
+  Future<void> updateItem(ReadingRecord data) async {
+    try {
+      final url = '${_baseUrl}pages/${data.id}';
+      final response = await http.patch(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer ${dotenv.env['NOTION_API_KEY']}',
+          'Notion-Version': '2022-02-22',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode({
           "properties": {
             "Name": {
               "title": [

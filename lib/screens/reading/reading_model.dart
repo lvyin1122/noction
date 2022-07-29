@@ -1,4 +1,5 @@
 class ReadingRecord {
+  final String id;
   final String name;
   final String type;
   final String status;
@@ -6,6 +7,7 @@ class ReadingRecord {
   final DateTime createdTime;
 
   const ReadingRecord({
+    this.id = "",
     required this.name,
     required this.type,
     required this.status,
@@ -18,6 +20,7 @@ class ReadingRecord {
     final nameList = (properties['Name']?['title'] ?? []) as List;
     // final dateStr = properties['Created']?['created'];
     return ReadingRecord(
+      id: map["id"] as String,
       name: nameList.isNotEmpty ? nameList[0]['plain_text'] : '?',
       type: properties['Type']?['select']?['name'] ?? 'Any',
       status: properties['Status']?['select']?['name'] ?? 'Any',

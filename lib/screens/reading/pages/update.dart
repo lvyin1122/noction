@@ -96,19 +96,25 @@ class _UpdateFormState extends State<UpdateForm> {
               child: const Text('Submit'),
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
-                  final name = controllerName.text;
-                  final type = controllerType.text;
-                  final status = controllerStatus.text;
-                  final score = double.parse(controllerScore.text);
-                  final createdTime = DateTime.now();
-                  final record = ReadingRecord(
-                    name: name,
-                    type: type,
-                    status: status,
-                    score: score,
-                    createdTime: createdTime,
-                  );
-                  await ReadingRepository.add(record);
+                  final id = widget.data.id;
+                  if (id.isEmpty) {
+                    await ReadingRepository().addItem(ReadingRecord(
+                      name: controllerName.text,
+                      type: controllerType.text,
+                      status: controllerStatus.text,
+                      score: double.parse(controllerScore.text),
+                      createdTime: DateTime.now(),
+                    ));
+                  } else {
+                    await ReadingRepository().updateItem(ReadingRecord(
+                      id: id,
+                      name: controllerName.text,
+                      type: controllerType.text,
+                      status: controllerStatus.text,
+                      score: double.parse(controllerScore.text),
+                      createdTime: widget.data.createdTime,
+                    ));
+                  }
                   Navigator.pop(context);
                 }
               },
