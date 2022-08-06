@@ -137,7 +137,6 @@ class _UpdateFormState extends State<UpdateForm> {
                   const Text('Submit', style: TextStyle(color: Colors.white)),
               color: Colors.black,
               height: 50,
-              minWidth: 100,
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   final id = widget.data.id;

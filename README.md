@@ -6,7 +6,11 @@ A Flutter application that provides various features back-ended with Notion API.
 
 - [ ] Reading List
     - [x] Layout
-    - [ ] CRUD
+    - [x] CRUD
+    - [ ] Data model
+    - [ ] Conditional icon display
+    - [ ] Filter: uery data by status / type
+    - [ ] Progress bar
     - [ ] Miscellaneous
 - [ ] Weekly Planner
     - [ ] Layout
