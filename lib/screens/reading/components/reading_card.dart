@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noction/screens/reading/pages/update.dart';
-import 'package:noction/screens/reading/reading_model.dart';
+import 'package:noction/screens/reading/pages/update_page.dart';
+import 'package:noction/data/models/reading_model.dart';
 
 class ReadingCard extends StatefulWidget {
   const ReadingCard({

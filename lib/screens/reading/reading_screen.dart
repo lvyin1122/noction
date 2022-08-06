@@ -3,9 +3,9 @@ import 'dart:developer' as developer;
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:noction/failure_model.dart';
-import 'package:noction/screens/reading/pages/update.dart';
-import 'package:noction/screens/reading/reading_model.dart';
-import 'package:noction/screens/reading/reading_repository.dart';
+import 'package:noction/screens/reading/pages/update_page.dart';
+import 'package:noction/data/models/reading_model.dart';
+import 'package:noction/data/repositories/reading_repository.dart';
 
 import 'components/reading_card.dart';
 
